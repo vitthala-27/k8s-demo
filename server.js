@@ -35,7 +35,6 @@ app.get("/", (req, res) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Kubernetes Demo</title>
 
   <style>
@@ -46,7 +45,7 @@ app.get("/", (req, res) => {
     }
 
     body {
-      font-family: Inter, Arial, sans-serif;
+      font-family: Arial, sans-serif;
       min-height: 100vh;
       background:
         radial-gradient(circle at top left, #243b70 0%, transparent 35%),
@@ -60,8 +59,6 @@ app.get("/", (req, res) => {
       max-width: 1000px;
       margin: auto;
     }
-
-    /* Header */
 
     .header {
       display: flex;
@@ -86,12 +83,10 @@ app.get("/", (req, res) => {
       justify-content: center;
       background: linear-gradient(135deg, #38bdf8, #6366f1);
       font-size: 25px;
-      box-shadow: 0 10px 35px rgba(59, 130, 246, 0.35);
     }
 
     .brand h1 {
       font-size: 25px;
-      letter-spacing: -0.5px;
     }
 
     .brand p {
@@ -120,42 +115,7 @@ app.get("/", (req, res) => {
       box-shadow: 0 0 10px #22c55e;
     }
 
-    /* Hero */
-
-    .hero {
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      border-radius: 24px;
-      padding: 35px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
-      margin-bottom: 25px;
-    }
-
-    .hero h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-      letter-spacing: -1px;
-    }
-
-    .hero h2 span {
-      color: #38bdf8;
-    }
-
-    .hero p {
-      color: #94a3b8;
-      line-height: 1.6;
-      max-width: 700px;
-    }
-
-    /* Grid */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
+    .hero,
     .card {
       background: rgba(15, 23, 42, 0.72);
       border: 1px solid rgba(148, 163, 184, 0.14);
@@ -165,12 +125,34 @@ app.get("/", (req, res) => {
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     }
 
+    .hero {
+      margin-bottom: 25px;
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 span {
+      color: #38bdf8;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
     .card h3 {
       font-size: 18px;
       margin-bottom: 20px;
     }
-
-    /* Form */
 
     .input-group {
       margin-bottom: 16px;
@@ -192,12 +174,10 @@ app.get("/", (req, res) => {
       color: white;
       outline: none;
       font-size: 14px;
-      transition: 0.2s;
     }
 
     input:focus {
       border-color: #38bdf8;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
     }
 
     button {
@@ -210,21 +190,12 @@ app.get("/", (req, res) => {
       font-weight: 600;
       font-size: 14px;
       cursor: pointer;
-      transition: 0.2s;
-      margin-top: 5px;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
     }
 
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
-
-    /* Data */
 
     .data-list {
       max-height: 350px;
@@ -237,10 +208,6 @@ app.get("/", (req, res) => {
       border-radius: 14px;
       padding: 15px;
       margin-bottom: 12px;
-    }
-
-    .data-item:last-child {
-      margin-bottom: 0;
     }
 
     .user-name {
@@ -260,8 +227,6 @@ app.get("/", (req, res) => {
       padding: 30px 10px;
       font-size: 14px;
     }
-
-    /* Architecture */
 
     .architecture {
       margin-top: 25px;
@@ -293,16 +258,12 @@ app.get("/", (req, res) => {
       font-size: 11px;
     }
 
-    /* Footer */
-
     .footer {
       text-align: center;
       color: #64748b;
       font-size: 12px;
       margin-top: 30px;
     }
-
-    /* Toast */
 
     .toast {
       position: fixed;
@@ -333,12 +294,8 @@ app.get("/", (req, res) => {
       }
 
       .header {
-        align-items: flex-start;
         flex-direction: column;
-      }
-
-      .hero {
-        padding: 25px;
+        align-items: flex-start;
       }
     }
   </style>
@@ -346,356 +303,338 @@ app.get("/", (req, res) => {
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- Header -->
+  <div class="header">
 
-    <div class="header">
+    <div class="brand">
 
-      <div class="brand">
-        <div class="logo">☸</div>
+      <div class="logo">☸</div>
 
-        <div>
-          <h1>Kubernetes Demo</h1>
-          <p>Node.js • MongoDB • Kubernetes</p>
-        </div>
-      </div>
-
-      <div class="status">
-        <span class="status-dot"></span>
-        Application Online
+      <div>
+        <h1>Kubernetes Demo</h1>
+        <p>Node.js • MongoDB • Kubernetes</p>
       </div>
 
     </div>
 
-
-    <!-- Hero -->
-
-    <div class="hero">
-
-      <h2>
-        Welcome to the <span>Kubernetes</span> Demo
-      </h2>
-
-      <p>
-        This application demonstrates a Node.js backend running
-        on Kubernetes with MongoDB persistence. Add your data below
-        and watch it survive pod restarts.
-      </p>
-
-    </div>
-
-
-    <!-- Main -->
-
-    <div class="grid">
-
-      <!-- Add Data -->
-
-      <div class="card">
-
-        <h3>➕ Add Data</h3>
-
-        <div class="input-group">
-
-          <label>Your Name</label>
-
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter your name"
-          >
-
-        </div>
-
-        <div class="input-group">
-
-          <label>Message</label>
-
-          <input
-            id="message"
-            type="text"
-            placeholder="Enter a message"
-          >
-
-        </div>
-
-        <button id="saveBtn" onclick="saveData()">
-          Save to MongoDB
-        </button>
-
-      </div>
-
-
-      <!-- Database Data -->
-
-      <div class="card">
-
-        <h3>🗄️ MongoDB Data</h3>
-
-        <div id="data" class="data-list">
-
-          <div class="empty">
-            Loading data...
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Architecture -->
-
-    <div class="card" style="margin-top:25px">
-
-      <h3>⚙️ Application Architecture</h3>
-
-      <div class="architecture">
-
-        <div class="arch-item">
-          <div class="arch-icon">🌐</div>
-          <strong>Browser</strong>
-          <span>User Interface</span>
-        </div>
-
-        <div class="arch-item">
-          <div class="arch-icon">🚀</div>
-          <strong>Node.js</strong>
-          <span>Backend API</span>
-        </div>
-
-        <div class="arch-item">
-          <div class="arch-icon">☸️</div>
-          <strong>Kubernetes</strong>
-          <span>Container Platform</span>
-        </div>
-
-        <div class="arch-item">
-          <div class="arch-icon">🍃</div>
-          <strong>MongoDB</strong>
-          <span>Persistent Database</span>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer">
-      Kubernetes CI/CD Demo • Node.js + MongoDB
+    <div class="status">
+      <span class="status-dot"></span>
+      Application Online
     </div>
 
   </div>
 
 
-  <!-- Toast -->
+  <div class="hero">
 
-  <div id="toast" class="toast">
-    Data saved successfully!
+    <h2>
+      Welcome to the <span>Kubernetes</span> Demo
+    </h2>
+
+    <p>
+      Node.js backend running on Kubernetes with MongoDB
+      persistent storage. Add data below and verify that
+      it survives pod restarts.
+    </p>
+
   </div>
 
 
-  <script>
+  <div class="grid">
 
-    async function saveData() {
+    <div class="card">
 
-      const name =
-        document.getElementById("name").value.trim();
+      <h3>➕ Add Data</h3>
 
-      const message =
-        document.getElementById("message").value.trim();
+      <div class="input-group">
 
-      const button =
-        document.getElementById("saveBtn");
+        <label>Your Name</label>
 
+        <input
+          id="name"
+          type="text"
+          placeholder="Enter your name"
+        >
 
-      if (!name || !message) {
+      </div>
 
-        showToast(
-          "Please enter both name and message.",
-          true
-        );
+      <div class="input-group">
 
-        return;
-      }
+        <label>Message</label>
 
+        <input
+          id="message"
+          type="text"
+          placeholder="Enter a message"
+        >
 
-      button.disabled = true;
+      </div>
 
-      button.innerText = "Saving...";
+      <button id="saveBtn" onclick="saveData()">
+        Save to MongoDB
+      </button>
 
-
-      try {
-
-        const response = await fetch("/api/users", {
-
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body: JSON.stringify({
-            name,
-            message
-          })
-
-        });
+    </div>
 
 
-        if (!response.ok) {
-          throw new Error("Failed to save data");
-        }
+    <div class="card">
+
+      <h3>🗄️ MongoDB Data</h3>
+
+      <div id="data" class="data-list">
+
+        <div class="empty">
+          Loading data...
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 
-        document.getElementById("name").value = "";
-        document.getElementById("message").value = "";
+  <div class="card" style="margin-top:25px">
+
+    <h3>⚙️ Application Architecture</h3>
+
+    <div class="architecture">
+
+      <div class="arch-item">
+        <div class="arch-icon">🌐</div>
+        <strong>Browser</strong>
+        <span>User Interface</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">🚀</div>
+        <strong>Node.js</strong>
+        <span>Backend API</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">☸️</div>
+        <strong>Kubernetes</strong>
+        <span>Container Platform</span>
+      </div>
+
+      <div class="arch-item">
+        <div class="arch-icon">🍃</div>
+        <strong>MongoDB</strong>
+        <span>Persistent Database</span>
+      </div>
+
+    </div>
+
+  </div>
 
 
-        await loadData();
+  <div class="footer">
+    Kubernetes CI/CD Demo • Node.js + MongoDB
+  </div>
+
+</div>
 
 
-        showToast(
-          "✓ Data saved to MongoDB"
-        );
+<div id="toast" class="toast">
+  Data saved successfully!
+</div>
 
-      }
 
-      catch (error) {
+<script>
 
-        console.error(error);
+async function saveData() {
 
-        showToast(
-          "Failed to save data",
-          true
-        );
+  const name =
+    document.getElementById("name").value.trim();
 
-      }
+  const message =
+    document.getElementById("message").value.trim();
 
-      finally {
+  const button =
+    document.getElementById("saveBtn");
 
-        button.disabled = false;
 
-        button.innerText = "Save to MongoDB";
+  if (!name || !message) {
 
-      }
+    showToast(
+      "Please enter both name and message.",
+      true
+    );
 
+    return;
+  }
+
+
+  button.disabled = true;
+  button.innerText = "Saving...";
+
+
+  try {
+
+    const response = await fetch("/api/users", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        name: name,
+        message: message
+      })
+
+    });
+
+
+    if (!response.ok) {
+      throw new Error("Failed to save data");
     }
 
 
-    async function loadData() {
-
-      const container =
-        document.getElementById("data");
+    document.getElementById("name").value = "";
+    document.getElementById("message").value = "";
 
 
-      try {
+    await loadData();
 
-        const response =
-          await fetch("/api/users");
+    showToast("✓ Data saved to MongoDB");
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    showToast(
+      "Failed to save data",
+      true
+    );
+
+  }
+
+  finally {
+
+    button.disabled = false;
+    button.innerText = "Save to MongoDB";
+
+  }
+
+}
 
 
-        if (!response.ok) {
-          throw new Error("Failed to load data");
-        }
+async function loadData() {
+
+  const container =
+    document.getElementById("data");
 
 
-        const users =
-          await response.json();
+  try {
+
+    const response =
+      await fetch("/api/users");
 
 
-        if (!users.length) {
-
-          container.innerHTML = `
-            <div class="empty">
-              No data yet.<br>
-              Add your first message!
-            </div>
-          `;
-
-          return;
-        }
-
-
-        container.innerHTML =
-          users
-            .reverse()
-            .map(user => `
-
-              <div class="data-item">
-
-                <div class="user-name">
-                  ${escapeHtml(user.name)}
-                </div>
-
-                <div class="user-message">
-                  ${escapeHtml(user.message)}
-                </div>
-
-              </div>
-
-            `)
-            .join("");
-
-      }
-
-      catch (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-          <div class="empty">
-            Unable to connect to backend.
-          </div>
-        `;
-
-      }
-
+    if (!response.ok) {
+      throw new Error("Failed to load data");
     }
 
 
-    function escapeHtml(value) {
+    const users =
+      await response.json();
 
-      const div =
+
+    if (users.length === 0) {
+
+      container.innerHTML =
+        '<div class="empty">' +
+        'No data yet.<br>' +
+        'Add your first message!' +
+        '</div>';
+
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    users.slice().reverse().forEach(function(user) {
+
+      const item =
         document.createElement("div");
 
-      div.textContent = value;
-
-      return div.innerHTML;
-
-    }
+      item.className = "data-item";
 
 
-    function showToast(message, error = false) {
+      const name =
+        document.createElement("div");
 
-      const toast =
-        document.getElementById("toast");
+      name.className = "user-name";
 
-
-      toast.innerText = message;
-
-      toast.style.background =
-        error ? "#dc2626" : "#16a34a";
+      name.textContent = user.name;
 
 
-      toast.classList.add("show");
+      const message =
+        document.createElement("div");
+
+      message.className = "user-message";
+
+      message.textContent = user.message;
 
 
-      setTimeout(() => {
+      item.appendChild(name);
+      item.appendChild(message);
 
-        toast.classList.remove("show");
+      container.appendChild(item);
 
-      }, 2500);
+    });
 
-    }
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    container.innerHTML =
+      '<div class="empty">' +
+      'Unable to connect to backend.' +
+      '</div>';
+
+  }
+
+}
 
 
-    // Load existing MongoDB data
-    loadData();
+function showToast(message, error) {
 
-  </script>
+  const toast =
+    document.getElementById("toast");
+
+
+  toast.innerText = message;
+
+  toast.style.background =
+    error ? "#dc2626" : "#16a34a";
+
+
+  toast.classList.add("show");
+
+
+  setTimeout(function() {
+
+    toast.classList.remove("show");
+
+  }, 2500);
+
+}
+
+
+loadData();
+
+</script>
 
 </body>
 </html>
