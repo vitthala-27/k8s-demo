@@ -31,272 +31,104 @@ const User = mongoose.model("User", userSchema);
 app.get("/", (req, res) => {
   res.send(`
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kubernetes Demo</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, #243b70 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #123d46 0%, transparent 35%),
-        #0b1020;
-      color: #f8fafc;
-      padding: 40px 20px;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+      color: #222;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 700px;
       margin: auto;
     }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 35px;
-      gap: 20px;
+    h1 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 5px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
     }
 
-    .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
-      font-size: 25px;
-    }
-
-    .brand h1 {
-      font-size: 25px;
-    }
-
-    .brand p {
-      color: #94a3b8;
-      margin-top: 4px;
-      font-size: 14px;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      padding: 9px 14px;
-      border-radius: 999px;
-      color: #86efac;
-      font-size: 13px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-    }
-
-    .hero,
     .card {
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      border-radius: 22px;
-      padding: 28px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero {
-      margin-bottom: 25px;
-    }
-
-    .hero h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .hero h2 span {
-      color: #38bdf8;
-    }
-
-    .hero p {
-      color: #94a3b8;
-      line-height: 1.6;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .card h3 {
-      font-size: 18px;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
       margin-bottom: 20px;
     }
 
-    .input-group {
-      margin-bottom: 16px;
-    }
-
-    label {
-      display: block;
-      color: #cbd5e1;
-      font-size: 13px;
-      margin-bottom: 7px;
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
     }
 
     input {
       width: 100%;
-      padding: 13px 15px;
-      border-radius: 12px;
-      border: 1px solid #334155;
-      background: rgba(15, 23, 42, 0.8);
-      color: white;
-      outline: none;
+      padding: 12px;
+      margin: 8px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
       font-size: 14px;
-    }
-
-    input:focus {
-      border-color: #38bdf8;
     }
 
     button {
       width: 100%;
+      padding: 12px;
       border: none;
-      border-radius: 12px;
-      padding: 13px;
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      border-radius: 6px;
+      background: #2563eb;
       color: white;
-      font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       cursor: pointer;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    button:hover {
+      background: #1d4ed8;
     }
 
-    .data-list {
-      max-height: 350px;
-      overflow-y: auto;
+    .data {
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
     }
 
-    .data-item {
-      border: 1px solid #1e293b;
-      background: rgba(30, 41, 59, 0.45);
-      border-radius: 14px;
-      padding: 15px;
-      margin-bottom: 12px;
+    .data:last-child {
+      border-bottom: none;
     }
 
-    .user-name {
-      color: #38bdf8;
-      font-weight: 600;
-      margin-bottom: 5px;
+    .name {
+      font-weight: bold;
+      color: #2563eb;
     }
 
-    .user-message {
-      color: #cbd5e1;
-      font-size: 14px;
+    .message {
+      color: #555;
+      margin-top: 4px;
     }
 
     .empty {
-      color: #64748b;
+      color: #888;
       text-align: center;
-      padding: 30px 10px;
+      padding: 15px;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 20px;
+      color: #16a34a;
       font-size: 14px;
-    }
-
-    .architecture {
-      margin-top: 25px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .arch-item {
-      text-align: center;
-      padding: 18px 10px;
-      border-radius: 15px;
-      background: rgba(30, 41, 59, 0.4);
-      border: 1px solid #1e293b;
-    }
-
-    .arch-icon {
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .arch-item strong {
-      display: block;
-      font-size: 13px;
-    }
-
-    .arch-item span {
-      color: #64748b;
-      font-size: 11px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #64748b;
-      font-size: 12px;
-      margin-top: 30px;
-    }
-
-    .toast {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      padding: 13px 18px;
-      border-radius: 12px;
-      background: #16a34a;
-      color: white;
-      font-size: 13px;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: 0.3s;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    @media (max-width: 750px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .architecture {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
@@ -305,140 +137,50 @@ app.get("/", (req, res) => {
 
 <div class="container">
 
-  <div class="header">
+  <h1>🚀 Kubernetes Demo</h1>
 
-    <div class="brand">
+  <div class="subtitle">
+    Node.js + MongoDB running on Kubernetes
+  </div>
 
-      <div class="logo">☸</div>
+  <div class="card">
 
-      <div>
-        <h1>Kubernetes Demo</h1>
-        <p>Node.js • MongoDB • Kubernetes</p>
-      </div>
+    <h2>Add Data</h2>
 
-    </div>
+    <input
+      id="name"
+      type="text"
+      placeholder="Enter your name"
+    >
 
-    <div class="status">
-      <span class="status-dot"></span>
-      Application Online
-    </div>
+    <input
+      id="message"
+      type="text"
+      placeholder="Enter your message"
+    >
+
+    <button onclick="saveData()">
+      Save
+    </button>
 
   </div>
 
 
-  <div class="hero">
+  <div class="card">
 
-    <h2>
-      Welcome to the <span>Kubernetes</span> Demo
-    </h2>
+    <h2>MongoDB Data</h2>
 
-    <p>
-      Node.js backend running on Kubernetes with MongoDB
-      persistent storage. Add data below and verify that
-      it survives pod restarts.
-    </p>
-
-  </div>
-
-
-  <div class="grid">
-
-    <div class="card">
-
-      <h3>➕ Add Data</h3>
-
-      <div class="input-group">
-
-        <label>Your Name</label>
-
-        <input
-          id="name"
-          type="text"
-          placeholder="Enter your name"
-        >
-
-      </div>
-
-      <div class="input-group">
-
-        <label>Message</label>
-
-        <input
-          id="message"
-          type="text"
-          placeholder="Enter a message"
-        >
-
-      </div>
-
-      <button id="saveBtn" onclick="saveData()">
-        Save to MongoDB
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🗄️ MongoDB Data</h3>
-
-      <div id="data" class="data-list">
-
-        <div class="empty">
-          Loading data...
-        </div>
-
-      </div>
-
+    <div id="data">
+      Loading...
     </div>
 
   </div>
 
 
-  <div class="card" style="margin-top:25px">
-
-    <h3>⚙️ Application Architecture</h3>
-
-    <div class="architecture">
-
-      <div class="arch-item">
-        <div class="arch-icon">🌐</div>
-        <strong>Browser</strong>
-        <span>User Interface</span>
-      </div>
-
-      <div class="arch-item">
-        <div class="arch-icon">🚀</div>
-        <strong>Node.js</strong>
-        <span>Backend API</span>
-      </div>
-
-      <div class="arch-item">
-        <div class="arch-icon">☸️</div>
-        <strong>Kubernetes</strong>
-        <span>Container Platform</span>
-      </div>
-
-      <div class="arch-item">
-        <div class="arch-icon">🍃</div>
-        <strong>MongoDB</strong>
-        <span>Persistent Database</span>
-      </div>
-
-    </div>
-
+  <div class="status">
+    ● Backend Connected
   </div>
 
-
-  <div class="footer">
-    Kubernetes CI/CD Demo • Node.js + MongoDB
-  </div>
-
-</div>
-
-
-<div id="toast" class="toast">
-  Data saved successfully!
 </div>
 
 
@@ -452,24 +194,10 @@ async function saveData() {
   const message =
     document.getElementById("message").value.trim();
 
-  const button =
-    document.getElementById("saveBtn");
-
-
   if (!name || !message) {
-
-    showToast(
-      "Please enter both name and message.",
-      true
-    );
-
+    alert("Please enter name and message");
     return;
   }
-
-
-  button.disabled = true;
-  button.innerText = "Saving...";
-
 
   try {
 
@@ -488,37 +216,18 @@ async function saveData() {
 
     });
 
-
     if (!response.ok) {
-      throw new Error("Failed to save data");
+      throw new Error("Failed to save");
     }
-
 
     document.getElementById("name").value = "";
     document.getElementById("message").value = "";
 
+    loadData();
 
-    await loadData();
+  } catch (error) {
 
-    showToast("✓ Data saved to MongoDB");
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    showToast(
-      "Failed to save data",
-      true
-    );
-
-  }
-
-  finally {
-
-    button.disabled = false;
-    button.innerText = "Save to MongoDB";
+    alert("Failed to save data");
 
   }
 
@@ -530,104 +239,62 @@ async function loadData() {
   const container =
     document.getElementById("data");
 
-
   try {
 
     const response =
       await fetch("/api/users");
 
-
-    if (!response.ok) {
-      throw new Error("Failed to load data");
-    }
-
-
     const users =
       await response.json();
-
 
     if (users.length === 0) {
 
       container.innerHTML =
-        '<div class="empty">' +
-        'No data yet.<br>' +
-        'Add your first message!' +
-        '</div>';
+        '<div class="empty">No data yet</div>';
 
       return;
-    }
 
+    }
 
     container.innerHTML = "";
 
-
     users.slice().reverse().forEach(function(user) {
 
-      const item =
+      const div =
         document.createElement("div");
 
-      item.className = "data-item";
+      div.className = "data";
 
+      div.innerHTML =
+        '<div class="name">' +
+        escapeHtml(user.name) +
+        '</div>' +
+        '<div class="message">' +
+        escapeHtml(user.message) +
+        '</div>';
 
-      const name =
-        document.createElement("div");
-
-      name.className = "user-name";
-
-      name.textContent = user.name;
-
-
-      const message =
-        document.createElement("div");
-
-      message.className = "user-message";
-
-      message.textContent = user.message;
-
-
-      item.appendChild(name);
-      item.appendChild(message);
-
-      container.appendChild(item);
+      container.appendChild(div);
 
     });
 
-  }
-
-  catch (error) {
-
-    console.error(error);
+  } catch (error) {
 
     container.innerHTML =
-      '<div class="empty">' +
-      'Unable to connect to backend.' +
-      '</div>';
+      '<div class="empty">Unable to load data</div>';
 
   }
 
 }
 
 
-function showToast(message, error) {
+function escapeHtml(value) {
 
-  const toast =
-    document.getElementById("toast");
+  const div =
+    document.createElement("div");
 
+  div.textContent = value;
 
-  toast.innerText = message;
-
-  toast.style.background =
-    error ? "#dc2626" : "#16a34a";
-
-
-  toast.classList.add("show");
-
-
-  setTimeout(function() {
-
-    toast.classList.remove("show");
-
-  }, 2500);
+  return div.innerHTML;
 
 }
 
