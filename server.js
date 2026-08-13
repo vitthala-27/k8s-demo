@@ -137,7 +137,7 @@ app.get("/", (req, res) => {
 
 <div class="container">
 
-  <h1>🚀 Hello this is my  Kubernetes cicd Demo</h1>
+  <h1>🚀 Hii this is my cicd Demo for K8s</h1>
 
   <div class="subtitle">
     Node.js + MongoDB running on Kubernetes
